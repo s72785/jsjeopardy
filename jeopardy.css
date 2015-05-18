@@ -30,9 +30,10 @@ body {
 
 /** The credits at the bottom */
 div.credits {
-  color: #ffaaaa;
+  color: #80aaaa;
   text-align: center;
-  font-size: 75%;
+  padding: 1ex;
+/*  font-size: 75%;*/
 }
 
 /** Makes the game take up the entire browser window */
@@ -79,6 +80,7 @@ div.gridheader {
   padding: 25px 10px 10px 10px;
   text-align: center;
   font-size: 100%;
+  font-weight:bold;
 }
 
 /** The jeopardy game board cells */
@@ -153,7 +155,7 @@ div.popuptext {
 div.credits a, .setupWindow a ,
 div.credits a:link, .setupWindow a:link,
 div.credits a:visited, .setupWindow a:visited {
-	color: #FF0000;
+	color: #ff3030;
 	text-decoration: none;
 }
 div.credits a:hover, .setupWindow a:hover,

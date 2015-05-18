@@ -54,7 +54,7 @@
 *********************************************************************************/
  
 /** The version number of this game */
-var VERSION = '0.12a'; 
+var VERSION = '0.12b'; 
  
 /** The current question being shown */
 var currentquestion = null;
@@ -65,20 +65,14 @@ var categories = [];
 /** Holds the player information */
 var players = [];
 
-/** w01f: currency (later on depending on language) */
-//var currency = '$';
-//var currency_first = true;
-var currency = '€';
-var currency_first = false;
-
 /////////////////////////////////////////////////////////////////////////////////////
 //   DELIMITED TEXT READING FUNCTIONS
 //
 
 /** A few Javascript additions to mimic Java string methods */
-String.prototype.trim = function() { return (this.replace(/^[\s\xA0]+/, "").replace(/[\s\xA0]+$/, "")) }
-String.prototype.startsWith = function(str) { return (this.match("^"+str)==str) }
-String.prototype.endsWith = function(str) {return (this.match(str+"$")==str) }
+String.prototype.trim = function() { return (this.replace(/^[\s\xA0]+/, '').replace(/[\s\xA0]+$/, '')) }
+String.prototype.startsWith = function(str) { return (this.match('^'+str)==str) }
+String.prototype.endsWith = function(str) {return (this.match(str+'$')==str) }
 String.prototype.replaceAll = function(orig, repl) { var temp = this; while (temp.indexOf(orig) >= 0) { temp = temp.replace(orig, repl); } return temp; }
 
 /** Checks the given field to see if it ends with a qualifier. */
@@ -185,7 +179,7 @@ function loadGame() {
 	// parse the csv_text into an array of question objects
 	// this loads the questions into an ordered array, even if the user has them
 	// out of order in the data file
-	var data = convert_csv($("textarea#setupdata").html());
+	var data = convert_csv($('textarea#setupdata').html());
 	// w01f:
 	// todo: merge multiple data in an array referenced by points
 // d[category][points]=data[] //=> d[col][row]
@@ -194,8 +188,16 @@ function loadGame() {
 //function getRandomArrayElement(array){
 //	return array[(parseInt(Math.random() * array.length))];
 //}
+
+/** w01f: currency (later on depending on language) */
+	cur = $('#currency').html().trim();
+	cur_first = parseInt($('#currency_first').html());
+
 	var max_questions_in_category = 0;
 	categories[0] = []; // add a hard coded element for final jeopardy
+	
+	$('div.credits').removeClass('hidden');
+	
 	for (var i = 1; i < data.length; i++) { // skip the header row
 		if (data[i].length >= 4) {
 			var question = createQuestion(data[i][0], (parseInt(data[i][1]) ? parseInt(data[i][1]) : 0), data[i][2], data[i][3]);
@@ -233,13 +235,13 @@ function loadGame() {
 	}//for col
 	html += '</tr>';
 	for (var row = 0; row < max_questions_in_category; row++) {
-		html += "<tr>";
+		html += '<tr>';
 		for (var col = 1; col < categories.length; col++) {
-			var gridid = "grid" + col + '-' + row;
+			var gridid = 'grid' + col + '-' + row;
 			question = categories[col][row];
 			if (question) {
 				question.gridid = gridid;
-				html += '<td width="' + cellwidth + '%" onclick="showQuestion(' + row + ', ' + col + ')"><div class="dialog-blue" id="' + gridid + '"><div class="content-blue"><div class="t-blue"></div><div class="griditem">' + (currency_first ? currency : '' ) + question.points + (currency_first ? '' : currency ) + '</div></div><div class="b-blue"><div></div></div></div></td>';
+				html += '<td width="' + cellwidth + '%" onclick="showQuestion(' + row + ', ' + col + ')"><div class="dialog-blue" id="' + gridid + '"><div class="content-blue"><div class="t-blue"></div><div class="griditem">' + ((cur_first)? cur : '' ) + question.points + ((cur_first)? '' : cur ) + '</div></div><div class="b-blue"><div></div></div></div></td>';
 			}else{
 				html += '<td>&nbsp;</td>';
 			}//if
@@ -247,13 +249,13 @@ function loadGame() {
 		html += '</tr>';
 	}//for row
 	html += '</table>';
-	$("#griddiv").prepend(html);
+	$('#griddiv').prepend(html);
 	//$('#'+gridid).parent().css('width',cellwidth).click(function(){showQuestion();});
 
 	// set the height of all cells in the header row to be the same height (in case some go multi-line)
 	checkHeaderHeight();
 	// add players to the board
-	var numplayers = parseInt($("#setupnumplayers").val())
+	var numplayers = parseInt($('#setupnumplayers').val())
 	for (var i = 1; i <= numplayers; i++) {
 		players[players.length] = createPlayer('Player ' + i);
 	}//for
@@ -263,13 +265,13 @@ function loadGame() {
 	html = '<table class="grid">';
 	var col = 0;
 	for (var row = 0; row < categories[col].length; row++) {
-		var gridid = "grid" + col + '-' + row;
+		var gridid = 'grid' + col + '-' + row;
 		question = categories[col][row];
 		question.gridid = gridid;
 		html += '<tr><td width="' + cellwidth + '%" onclick="showQuestion(' + row + ', ' + col + ')""><div class="dialog-blue" id="' + gridid + '"><div class="content-blue"><div class="t-blue"></div><div class="griditem">' + question.category + '</div></div><div class="b-blue"><div></div></div></div></td></tr>';
 	}//for
 	html += '</table>';
-	$("#finaljeopardydiv").html(html);
+	$('#finaljeopardydiv').html(html);
 
 	// finally, close the setup dialog
 	tb_remove();
@@ -283,7 +285,7 @@ function refreshPlayers() {
 		var player = players[i];
 		html += '<div class="dialog-black" onclick="editPlayer(' + i + ')"><div class="content-black"><div class="t-black"></div><div class="playerinfo"><div class="playername">' + player.name + '</div><div class="playerscore" id="playerscore' + i + '">' + player.score + '</div></div></div><div class="b-black"><div></div></div></div>'
 	}//for i
-	$("#players").html(html);
+	$('#players').html(html);
 
 	// set the player grading table in the answer window
 	var row1 = '';
@@ -291,7 +293,7 @@ function refreshPlayers() {
 		var player = players[i];
 		row1 += '<td><div id="answerWindowPlayer' + i + '"><div class="answerPlayerName" id="answerPlayerName' + i + '">' + player.name + '</div><div class="answerWindowGrades" id="answerWindowGrade' + i + '"><img src="img/correct.png" onclick="scoreAnswer(true, ' + i + ')">&nbsp;&nbsp;&nbsp;<img src="img/incorrect.png" onclick="scoreAnswer(false, ' + i + ')"></div><div class="answerWindowScores" id="answerscorediv' + i + '"><input type="text" size="7" value="" id="answerscore' + i + '"></div></div></td>';
 	}//for i
-	$("#questionplayers").html('<table class="questionPlayerTable"><tr>' + row1 + '</tr></table>');
+	$('#questionplayers').html('<table class="questionPlayerTable"><tr>' + row1 + '</tr></table>');
 }//refreshPlayers
 
 /** Resizes the column headers to ensure they have the same width. */
@@ -344,7 +346,7 @@ function deletePlayer(index) {
 	var player = players[index];
 	if (players.length <= 1) {
 		alert($('#err_players_length').html());
-	}else if (confirm($('#q_delete').html() + player.name + "?")) {
+	}else if (confirm($('#q_delete').html() +' '+ player.name + '?')) {
 		players.splice(index, 1);
 		refreshPlayers();
 		tb_remove();
@@ -392,18 +394,18 @@ function showQuestion(row, col) {
 		}//if
 	}//if
 	// set up the question dialog
-	$("#popuptext").html(currentquestion.answer);
+	$('#popuptext').html(currentquestion.answer);
 	for (var index = 0; index < players.length; index++) {
-		$("#answerscore" + index).val(currentquestion.points);
-		$("#answerscorediv" + index).css('visibility', (currentquestion.finaljeopardy ? 'visible' : 'hidden'));
+		$('#answerscore' + index).val(currentquestion.points);
+		$('#answerscorediv' + index).css('visibility', (currentquestion.finaljeopardy ? 'visible' : 'hidden'));
 	}//for
 	// hide the grid item for this answer
 	$('#'+currentquestion.gridid).css('visibility', 'hidden');
 	// ensure the answer correct/incorrect divs are visible
 	for (var index = 0; index < players.length; index++) {
-//		$("#answerPlayerName" + index).css('color', '#FFFFFF');
-		$("#answerWindowGrade" + index).css('visibility', 'visible');
-		$("#answerWindowPlayer" + index).css('visibility', 'visible');
+//		$('#answerPlayerName' + index).css('color', '#FFFFFF');
+		$('#answerWindowGrade' + index).css('visibility', 'visible');
+		$('#answerWindowPlayer' + index).css('visibility', 'visible');
 	}//for
 	// show the dialog
 	tb_show(currentquestion.category, '#TB_inline?height=300&width=500&inlineId=questionWindow', null);
@@ -416,10 +418,10 @@ function toggleAnswer(showQuestion) {
 		return;
 	}
 	// toggle the question or answer
-	if (showQuestion || $("#popuptext").html() == currentquestion.answer) {
-		$("#popuptext").html(currentquestion.question);
+	if (showQuestion || $('#popuptext').html() == currentquestion.answer) {
+		$('#popuptext').html(currentquestion.question);
 	}else{
-		$("#popuptext").html(currentquestion.answer);
+		$('#popuptext').html(currentquestion.answer);
 	}//if
 }//toggleAnswer
 
@@ -431,33 +433,33 @@ function scoreAnswer(correct, index) {
 	}
 	// get the player and add or remove to the score
 	var player = players[index];
-	var adjustment = (correct ? 1 : -1) * parseInt($("#answerscore" + index).val());
+	var adjustment = (correct ? 1 : -1) * parseInt($('#answerscore' + index).val());
 	if (!isNaN(adjustment)) {
 		player.score += adjustment;
 	}
 	// update the player score on the screen
-	$("#playerscore" + index).html(player.score);
+	$('#playerscore' + index).html(player.score);
 	// adjust the screen based on the answer the player gave
 	if (currentquestion.finaljeopardy) {
-		$("#answerscorediv" + index).css('visibility', 'hidden');
-		$("#answerWindowGrade" + index).css('visibility', 'hidden');
-//		if (correct) {			$("#answerPlayerName" + index).css('color', "#FFFFCC");		}
+		$('#answerscorediv' + index).css('visibility', 'hidden');
+		$('#answerWindowGrade' + index).css('visibility', 'hidden');
+//		if (correct) {			$('#answerPlayerName' + index).css('color', '#FFFFCC');		}
 	}else if (correct) {
-//		$("#answerPlayerName" + index).css('color', "#FFFFCC");
+//		$('#answerPlayerName' + index).css('color', '#FFFFCC');
 		for (var i = 0; i < players.length; i++) {
-			$("#answerWindowGrade" + i).css('visibility', 'hidden');
+			$('#answerWindowGrade' + i).css('visibility', 'hidden');
 			if (i != index) {
-				$("#answerWindowPlayer" + i).css('visibility', 'hidden');
+				$('#answerWindowPlayer' + i).css('visibility', 'hidden');
 			}//if
 		}//for i
 	}else { // incorrect
-		$("#answerWindowPlayer" + index).css('visibility', 'hidden');
-		$("#answerWindowGrade" + index).css('visibility', 'hidden');
+		$('#answerWindowPlayer' + index).css('visibility', 'hidden');
+		$('#answerWindowGrade' + index).css('visibility', 'hidden');
 	}//if
 	// if all are answered, show the question
 	var allhidden = true;
 	for (var i = 0; i < players.length; i++) {
-		if ($("#answerWindowGrade" + i).css('visibility') == 'visible') {
+		if ($('#answerWindowGrade' + i).css('visibility') == 'visible') {
 			allhidden = false;
 		}
 	}
@@ -494,34 +496,37 @@ function getPlayerIndex(){
 	return parseInt($('#editplayerindex').val());
 }
 
-/** Starts the main function in the jeopardy.js file */
+/** w01f: currency (later on depending on language) */
+var cur = '',
+	cur_first = '';
+
+	/** Starts the main function in the jeopardy.js file */
 // w01f: moved here from index.html
 $(document).ready(function() {
-
 	// w01f: hide .jswarning
-	$(".jswarning").addClass('hidden');
+	$('.jswarning').addClass('hidden');
 	// w01f: bind former hardcoded events with jquery
-	$("#popuptext").click(function(e){
+	$('#popuptext').click(function(e){
 		e.preventDefault();
 		toggleAnswer();
 	});
-	$("#btnDeleteUser").click(function(e){
+	$('#btnDeleteUser').click(function(e){
 		e.preventDefault();
 		deletePlayer(getPlayerIndex());
 	});
-	$("#btnSaveUser").click(function(e){
+	$('#btnSaveUser').click(function(e){
 		e.preventDefault();
 		savePlayer(getPlayerIndex());
 	});
-	$("#btnAddPlayerBefore").click(function(e){
+	$('#btnAddPlayerBefore').click(function(e){
 		e.preventDefault();
 		addPlayerAt(getPlayerIndex());
 	});
-	$("#btnAddPlayerAfter").click(function(e){
+	$('#btnAddPlayerAfter').click(function(e){
 		e.preventDefault();
 		addPlayerAt(getPlayerIndex()+1);
 	});
-	$("#btnPlayJeopardy").click(function(e){
+	$('#btnPlayJeopardy').click(function(e){
 		e.preventDefault();
 		loadGame();
 	});
@@ -540,7 +545,7 @@ $(document).ready(function() {
 	});
 
 	/*
-	$("#lnkSetupData").click(function(){
+	$('#lnkSetupData').click(function(){
 		readFile($('#selTopicFile').val());
 	});
 	$('#lnkSetupData').addClass('hidden');
@@ -570,9 +575,11 @@ $(document).ready(function() {
 	//load languages.csv and add included languages as click-/selectable in setupscreen
 
 	// w01f: start orig. game-loader - former function main()
-	document.title = "JS Jeopardy! v" + VERSION;
+	document.title = 'JS Jeopardy! v' + VERSION;
 	// show the game setup dialog
 	tb_show('JS Jeopardy', '#TB_inline?height=500&width=800&inlineId=setupWindow&modal=true', null);
 	// w01f: prevent horizontal scrollbar
 	$('textarea').css('width','100%');
+	$('#appname').append('&nbsp;V'+VERSION);
+	$('div#TB_window > div#TB_ajaxContent').before($('div.credits:last').clone().removeClass('hidden').css('background','#114'));
 });

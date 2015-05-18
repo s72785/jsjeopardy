@@ -1,7 +1,7 @@
 idea: implementing a jeopardy as app like cisco did as teamtraining with powerpoint
 idea: extend game-modes for memorizing topics
 idea: 2nd game-mode "box-learning" like flash-cards etc.
--101026
+-101026=12
 found good implementation in Conan C. Albrecht's "JS Jeopardy"
 Moved $(document).ready in existing jeopardy.js to seperate JavaScript from HtML
 added local copy of gpl3.0 as pure text and link
@@ -30,7 +30,7 @@ idea: seperate imagepreloader from thickbox to use it without or exchange the mo
 adjusted css of thickbox to prevent unwanted kaskading from id on links
 changed delim und qualifier-recognition in function convert_csv
 added .jswarning in index.html to point out deactivated/unavailable javascript for unexperienced users
--101028
+-101028=12a
 idea: counting points for the teachers bad phrases
 idea: mention the author of a game-set
 fixed bad errormessage (no information given) on file-loading
@@ -61,6 +61,13 @@ prepared random selection of one out of many questions in loadGame
 replaced cols at textarea with jquery-width
 -101102
 now using e.preventDefault() when capturing i.e. click-events instead of nothing or return false
+-101105=12b
+incremented version due to existing package on homepage
+appending Version in credits
+moved currency and position to html
+replaces several dblquotes with single one
+moved unnessarry css-asterisk-hack for margin and padding to body (thickbox.css)
+showing credits in setupWindow
 ...
 outstanding goals:
 Milestone II -	modular architecture, multilanguage support

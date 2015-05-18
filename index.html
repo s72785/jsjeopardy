@@ -1,4 +1,4 @@
-<!--
+<!doctype html><!--
  -
  -  Copyright (c) 2009, Conan Albrecht <conan@warp.byu.edu>
  -
@@ -80,8 +80,8 @@
 
 <!-- Hidden content shown at the beginning of the game -->
 <div id="setupWindow" class="setupWindow hidden">
-<div class="setupWindow" align="center"><h1>JS Jeopardy!</h1><br /></div>
-<div class="setupWindow" id="setupGame"><h3>Setup Game</h3><br />
+<div class="setupWindow" align="center"><h1>JS Jeopardy!</h1></div>
+<div class="setupWindow" id="setupGame"><h3>Setup Game</h3>
 <p class="setupWindow">Welcome to JS Jeopardy! This is a free, online game for teachers within the classroom (K-12, College), presenters in any setting, or individuals wanting a fun "flash card system" to review concepts. The program allows custom questions and answers that you specify (it doesn't come preloaded). Games are not saved on the server, but are temporary within your browser window, so be sure to save your question files separately.</p>
 <p class="setupWindow">Load an entry from the local repository:
 	<select id="selTopicFile">
@@ -97,7 +97,7 @@ Or begin by entering delimited text data into the following text box. The Exampl
 <textarea id="setupdata" class="" rows="5">Category,Points,Answer,Question
 </textarea><br />
 </p>
-<p class="setupWindow">Next, select the number of players in this game: 
+<p class="setupWindow">Now select the number of players in this game: 
 	<input type="button" class="setPlayerNum" id="" value=" - " /><select id="setupnumplayers">
 		<option>1</option>
 		<option selected="selected">2</option>
@@ -105,13 +105,12 @@ Or begin by entering delimited text data into the following text box. The Exampl
 		<option>4</option>
 		<option>5</option>
 	</select><input type="button" class="setPlayerNum" id="" value=" + " />
-<br />Once the game is started, you can add or remove players, change player names, or adjust player scores by clicking a player box on the game board.<p>
+<br />Once the game is started, you can add or remove players, change player names, or adjust player scores by clicking a player box on the game board.</p>
 <p class="setupWindow">Read below for more detailed instructions on playing and administering the game setup. Enjoy the game!</p>
 <p class="setupWindow" align="center"><input id="btnPlayJeopardy" name="btnPlayJeopardy" type="button" value="Play Jeopardy!"></p>
 </div>
-<div class="setupWindow">&nbsp;</div>
 <div class="setupWindow">
-<h3 class="setupWindow" id="instructions">Instructions and Notes</h3><br />
+<h3 class="setupWindow" id="instructions">Instructions and Notes</h3>
 <ul class="setupWindow">
 	<li>This game should normally be run by a teacher, presenter, etc., on a central projector that everyone sees. This game is not a standalone version of Jeopardy that runs itself. It is meant as a teaching tool.
 	<li>You need to be running a modern browser, such as Firefox 3+, Safari 3+, Chrome, or IE 7+. Be sure your browser is updated. I test it most on Safari since that's my primary browser right now.
@@ -127,22 +126,24 @@ Or begin by entering delimited text data into the following text box. The Exampl
 	<li>At the end of the game, click the Final Jeopardy item(s) under the list of players. When players get this question right or wrong, the dialog does not close. This allows you to set the wager for each team and impact their score accordingly.
 	<li>To start the game over, refresh the page. You'll be taken back to this setup page.
 	<li>This game may run inside your browser, but it does not need a web server or web access. You can simply place the files on your hard drive, open your browser, select "File | Open...", and load the index.html page to start the game.
-	<li>If you are wondering, JS stands for "JavaScript" Jeopardy. This game is entirely written in Javascript, so hence the name.
-	<li>If you download this game to your computer, you can run it even when you are not connected to the Internet. Download the original application from the <a target="_blank" href="http://warp.byu.edu/">authors software page</a> or the modded one from the <a href="http://w01f/jeopardy/" target="_blank">modders webiste</a>.
+	<li>If you are wondering, JS stands for "JavaScript" Jeopardy. This game is entirely written in HtML/Javascript, so hence the name.
+	<li>If you download this game to your computer, you can run it even when you are not connected to the Internet. Download  <a href="http://w01f/jeopardy/" target="_blank">this modified version</a> or <a target="_blank" href="http://warp.byu.edu/">the original one</a>.
 </ul>
 </div>
 </div>
 
-<div class="credits">
-JS&nbsp;Jeopardy! Copyright&nbsp;(c)&nbsp;2009 <a href="http://warp.byu.edu/" target="_blank">Conan&nbsp;C.&nbsp;Albrecht</a>,
-<a href="w01f-changed.txt" target="_blank">mod</a> by <a href="http://w01f.de" target="_blank">w01f</a> (c)&nbsp;2010.
-Released under the <a href="http://www.fsf.org/licensing/" target="_blank">GNU</a> <a href="gpl-3.0.txt" target="_blank">General Public License</a>.
+<div class="credits hidden">
+<span id="appname">JS&nbsp;Jeopardy!</span> <a href="w01f-changed.txt" target="_blank">modifications</a>&nbsp;(c)&nbsp;2010 <a href="http://w01f.de" target="_blank">w01f</a>, Original V0.12 (c)&nbsp;2009 <a href="http://warp.byu.edu/" target="_blank">C.&nbsp;Albrecht</a>,
+released under <a href="http://www.fsf.org/licensing/" target="_blank">GNU</a>&nbsp;<a href="gpl-3.0.txt" target="_blank">GPL 3.0</a>.
 </div>
 
-<div class="prototype hidden" id="err_categories_length">You didn't specify any questions, or you didn't format them correctly. You may want to try loading the example game data for a demo (click the yellow link just above the text box).</div>
+<div class="prototype hidden" id="err_categories_length">You didn't specify any questions, or you didn't format them correctly. You may want to try loading the example game data for a demo.</div>
 <div class="prototype hidden" id="err_players_length">The game wouldn't be any fun without at least one player!</div>
-<div class="prototype hidden" id="q_delete">Delete </div>
+<div class="prototype hidden" id="q_delete">Delete</div>
 <div class="prototype hidden" id="q_final_jeopardy">Items still exist on the board. Are you sure you want to continue to final jeopardy?</div>
 <div class="prototype hidden" id="q_show_answeredquestion">This Answer was questioned already, are you shure you want to reactivate it?</div>
 <div class="prototype hidden" id="err_data_file">An error occurred while reading the selcted file\n</div>
+<div class="prototype hidden" id="currency">$</div>
+<div class="prototype hidden" id="currency_first">1</div>
+
 </body></html>
