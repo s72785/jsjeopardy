@@ -17,10 +17,9 @@
  *
  *********************************************************************************/
 
-
 /* Sets the body background and font */
 body { 
-  background-image: url("wallpaper.jpg");
+  background-image: url("img/wallpaper.jpg");
   font-family: Lucida Sans Unicode, Lucida Grande, sans-serif;
 }
 
@@ -31,7 +30,7 @@ body {
 
 /** The credits at the bottom */
 div.credits {
-  color: #cccccc;
+  color: #ffaaaa;
   text-align: center;
   font-size: 75%;
 }
@@ -140,4 +139,36 @@ div.popuptext {
 .answerWindowGrades {
   color: #FFFFFF;
   text-align: center;
+}
+
+/* class for hiding elements and excluding css from html */
+.hidden{
+	display: none;
+}
+.centered{
+	text-align: center;
+}
+
+/* links in credits and setupWindow */
+div.credits a, .setupWindow a ,
+div.credits a:link, .setupWindow a:link,
+div.credits a:visited, .setupWindow a:visited {
+	color: #FF0000;
+	text-decoration: none;
+}
+div.credits a:hover, .setupWindow a:hover,
+div.credits a:active, .setupWindow a:active,
+div.credits a:focus, .setupWindow a:focus{
+	color: #FFFFCC;
+	text-decoration: underline;
+}
+
+/*Warning if JScript is not available, will be hidden by an JScript*/
+.jswarning{
+	margin: 5ex 15ex 5ex 15ex;
+	color: black;
+	background-color: yellow;
+	border: 3px solid red;
+	font-size: 1.2em;
+	font-weight: bold;
 }

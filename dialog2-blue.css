@@ -17,13 +17,13 @@
 .dialog-blue .t-blue,
 .dialog-blue .b-blue,
 .dialog-blue .b-blue div {
- background:transparent url(dialog2-blue-800x1600.png) no-repeat top right;
- _background-image:url(dialog2-blue.gif);
+ background:transparent url(img/dialog2-blue-800x1600.png) no-repeat top right;
+ _background-image:url(img/dialog2-blue.gif);
 }
 
 .dialog-blue .content-blue {
  position:relative;
- zoom:1;
+/* zoom:1;*/
  _overflow-y:hidden;
  padding:0px 12px 0px 0px;
 }

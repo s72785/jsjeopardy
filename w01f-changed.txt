@@ -1,0 +1,75 @@
+idea: implementing a jeopardy as app like cisco did as teamtraining with powerpoint
+idea: extend game-modes for memorizing topics
+idea: 2nd game-mode "box-learning" like flash-cards etc.
+-101026
+found good implementation in Conan C. Albrecht's "JS Jeopardy"
+Moved $(document).ready in existing jeopardy.js to seperate JavaScript from HtML
+added local copy of gpl3.0 as pure text and link
+added my mod-comment in div.credits, linked seperate changelog and my website
+idea: multilang-support over csv and selection on startup
+languages.csv as a List of language (local name, internat. name, link for lang.csv)
+lang.csv with localisation (css-selector,lang-text)
+idea: add collection of topic-csv on startup with comment of language
+topics.csv (Test-Game,English,topic-exdata.csv)
+topic-xy.csv like data.csv=topic-exdata.csv
+commented css zoom:1 to prevent warning in ff
+moved css from index.html in existing jeopardy.css
+moved images in subdir img and modified sorces, modified links in css
+set number of player/-teams on two as standard
+idea: tast-stacks as repository by serverside-script(php)
+added id/name to unnamed elements
+replaced onclick-entries with jquery-events in jeopardy.js:main()
+Milestone I -	provided games are more easy selectable
+-101027
+next goal: loading repository of provided games
+added selection-list for topic-data and some jquery for that one
+idea: exclude html from jscript with html-prototypes identified by id and copied with jquery
+merged jscript-string-concetations to strings for later move in a html-prototype
+idea: heavy use of jquery instead of probably incompatible native jscript-functions
+idea: seperate imagepreloader from thickbox to use it without or exchange the module
+adjusted css of thickbox to prevent unwanted kaskading from id on links
+changed delim und qualifier-recognition in function convert_csv
+added .jswarning in index.html to point out deactivated/unavailable javascript for unexperienced users
+-101028
+idea: counting points for the teachers bad phrases
+idea: mention the author of a game-set
+fixed bad errormessage (no information given) on file-loading
+added a variable for the currency (forseen multilanguage)
+moved html from function loadGame to index.html
+added function getPlayerIndex
+changed addPlayer-functions to obtain index as parameter instead of reading the form themself
+replaced functions addPlayerBefore addPlayerAfter with addPlayerAt
+idea: remove onclick-event after first click on answer or confirm showing again to reduce falty usage
+replaced calls for getElementById with jquery
+commented out color-change when answer is correct as i didnt even see that little colorchange at usage until now in the code
+added toString() in create-funcions to prevent unwanted exception for char-arrays on excpected strings
+idea: (optionally) indicate and force rounds - so every player has same chances to answer
+added variable currency_first for multilanguage -> true:before number, false:afterwards
+changed setupData to readFile for multipurpose-usage
+-101029
+replaced [0].style.visibility with .css()
+fixed error in in function addPlayerAt on unexpected index
+added selection in editPlayer
+avoid reviewing questioned answer without confirmation
+-101030
+added buttons to inc and dec playernum in setupwindow
+-101101
+moved select-prepend from js to html as it is and will be static
+moved select-options from html to js that will be dynamic
+fixed unwanted exceptions by char-arrays in convert_cvs by .toString on fields
+prepared random selection of one out of many questions in loadGame
+replaced cols at textarea with jquery-width
+-101102
+now using e.preventDefault() when capturing i.e. click-events instead of nothing or return false
+...
+outstanding goals:
+Milestone II -	modular architecture, multilanguage support
+Milestone III -	repository with online-sources, online edit-/submitable packages
+Milestone IV -	auto-generated packages
+Milestone V -	
+optional goals:
+Milestone VI -	counting teachers points, force-to-rounds-option
+Milestone VII -	
+Milestone VIII -game-mode "flashcards"
+Milestone IX -	
+Milestone X -	excluded imagepreloader

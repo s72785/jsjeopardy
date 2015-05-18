@@ -1,11 +1,11 @@
 /*
- * Thickbox 3.1 - One Box To Rule Them All.
- * By Cody Lindley (http://www.codylindley.com)
- * Copyright (c) 2007 cody lindley
- * Licensed under the MIT License: http://www.opensource.org/licenses/mit-license.php
+* Thickbox 3.1 - One Box To Rule Them All.
+* By Cody Lindley (http://www.codylindley.com)
+* Copyright (c) 2007 cody lindley
+* Licensed under the MIT License: http://www.opensource.org/licenses/mit-license.php
 */
 		  
-var tb_pathToImage = "images/loadingAnimation.gif";
+var tb_pathToImage = 'img/ajax-loader.gif';
 
 /*!!!!!!!!!!!!!!!!! edit below this line at your own risk !!!!!!!!!!!!!!!!!!!!!!!*/
 
@@ -19,12 +19,12 @@ $(document).ready(function(){
 //add thickbox to href & area elements that have a class of .thickbox
 function tb_init(domChunk){
 	$(domChunk).click(function(){
-	var t = this.title || this.name || null;
-	var a = this.href || this.alt;
-	var g = this.rel || false;
-	tb_show(t,a,g);
-	this.blur();
-	return false;
+		var t = this.title || this.name || null;
+		var a = this.href || this.alt;
+		var g = this.rel || false;
+		tb_show(t,a,g);
+		this.blur();
+		return false;
 	});
 }
 
@@ -51,7 +51,7 @@ function tb_show(caption, url, imageGroup) {//function called when the user clic
 			$("#TB_overlay").addClass("TB_overlayBG");//use background and opacity
 		}
 		
-		if(caption===null){caption="";}
+		if(caption===null){caption='';}
 		$("body").append("<div id='TB_load'><img src='"+imgLoader.src+"' /></div>");//add loader to the page
 		$('#TB_load').show();//show loader
 		
@@ -67,27 +67,27 @@ function tb_show(caption, url, imageGroup) {//function called when the user clic
 
 		if(urlType == '.jpg' || urlType == '.jpeg' || urlType == '.png' || urlType == '.gif' || urlType == '.bmp'){//code to show images
 				
-			TB_PrevCaption = "";
-			TB_PrevURL = "";
-			TB_PrevHTML = "";
-			TB_NextCaption = "";
-			TB_NextURL = "";
-			TB_NextHTML = "";
-			TB_imageCount = "";
+			TB_PrevCaption = '';
+			TB_PrevURL = '';
+			TB_PrevHTML = '';
+			TB_NextCaption = '';
+			TB_NextURL = '';
+			TB_NextHTML = '';
+			TB_imageCount = '';
 			TB_FoundURL = false;
 			if(imageGroup){
 				TB_TempArray = $("a[@rel="+imageGroup+"]").get();
-				for (TB_Counter = 0; ((TB_Counter < TB_TempArray.length) && (TB_NextHTML === "")); TB_Counter++) {
+				for (TB_Counter = 0; ((TB_Counter < TB_TempArray.length) && (TB_NextHTML === '')); TB_Counter++) {
 					var urlTypeTemp = TB_TempArray[TB_Counter].href.toLowerCase().match(urlString);
 						if (!(TB_TempArray[TB_Counter].href == url)) {						
 							if (TB_FoundURL) {
 								TB_NextCaption = TB_TempArray[TB_Counter].title;
 								TB_NextURL = TB_TempArray[TB_Counter].href;
-								TB_NextHTML = "<span id='TB_next'>&nbsp;&nbsp;<a href='#'>Next &gt;</a></span>";
+								TB_NextHTML = '<span id="TB_next">&nbsp;&nbsp;<a href="#">Next &gt;</a></span>';
 							} else {
 								TB_PrevCaption = TB_TempArray[TB_Counter].title;
 								TB_PrevURL = TB_TempArray[TB_Counter].href;
-								TB_PrevHTML = "<span id='TB_prev'>&nbsp;&nbsp;<a href='#'>&lt; Prev</a></span>";
+								TB_PrevHTML = '<span id="TB_prev">&nbsp;&nbsp;<a href="#">&lt; Prev</a></span>';
 							}
 						} else {
 							TB_FoundURL = true;
@@ -129,7 +129,7 @@ function tb_show(caption, url, imageGroup) {//function called when the user clic
 			
 			$("#TB_closeWindowButton").click(tb_remove);
 			
-			if (!(TB_PrevHTML === "")) {
+			if (!(TB_PrevHTML === '')) {
 				function goPrev(){
 					if($(document).unbind("click",goPrev)){$(document).unbind("click",goPrev);}
 					$("#TB_window").remove();
@@ -140,7 +140,7 @@ function tb_show(caption, url, imageGroup) {//function called when the user clic
 				$("#TB_prev").click(goPrev);
 			}
 			
-			if (!(TB_NextHTML === "")) {		
+			if (!(TB_NextHTML === '')) {		
 				function goNext(){
 					$("#TB_window").remove();
 					$("body").append("<div id='TB_window'></div>");
@@ -160,13 +160,13 @@ function tb_show(caption, url, imageGroup) {//function called when the user clic
 				if(keycode == 27){ // close
 					tb_remove();
 				} else if(keycode == 190){ // display previous image
-					if(!(TB_NextHTML == "")){
-						document.onkeydown = "";
+					if(!(TB_NextHTML == '')){
+						document.onkeydown = '';
 						goNext();
 					}
 				} else if(keycode == 188){ // display next image
-					if(!(TB_PrevHTML == "")){
-						document.onkeydown = "";
+					if(!(TB_PrevHTML == '')){
+						document.onkeydown = '';
 						goPrev();
 					}
 				}	
@@ -272,10 +272,10 @@ function tb_remove() {
 	$("#TB_load").remove();
 	if (typeof document.body.style.maxHeight == "undefined") {//if IE 6
 		$("body","html").css({height: "auto", width: "auto"});
-		$("html").css("overflow","");
+		$("html").css("overflow",'');
 	}
-	document.onkeydown = "";
-	document.onkeyup = "";
+	document.onkeydown = '';
+	document.onkeyup = '';
 	return false;
 }
 

@@ -17,13 +17,13 @@
 .dialog-black .t-black,
 .dialog-black .b-black,
 .dialog-black .b-black div {
- background:transparent url(dialog2-black-1600x1200.png) no-repeat top right;
- _background-image:url(dialog2-black.gif);
+ background:transparent url(img/dialog2-black-1600x1200.png) no-repeat top right;
+ _background-image:url(img/dialog2-black.gif);
 }
 
 .dialog-black .content-black {
  position:relative;
- zoom:1;
+ /* zoom:1;*/
  _overflow-y:hidden;
  padding:0px 12px 0px 0px;
 }
