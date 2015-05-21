@@ -556,6 +556,7 @@ $(document).ready(function() {
 	$('#selTopicFile').append(
 		'<option class="topic" id="topic-exdata.en.csv" value="topic-exdata.en.csv">(en) Example Topic</option>'
 		+'<option class="topic" id="topic-exdata.de.csv" value="topic-exdata.de.csv">(de) Beispiel-Thema</option>'
+		+'<option class="topic" id="topic-foti.en.csv" value="topic-foti.en.csv">(en) Freedom on the Internet</option>'
 	).change(function(){
 		var topic = $('#selTopicFile').val();
 		
